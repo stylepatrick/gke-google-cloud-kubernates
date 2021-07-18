@@ -12,8 +12,8 @@ spec:
       - path: /*
         backend:
           serviceName: household-book
-          servicePort: 80
+          servicePort: 8080
       - path: /auth/*
         backend:
           serviceName: keycloak
-          servicePort: 80
+          servicePort: 8080

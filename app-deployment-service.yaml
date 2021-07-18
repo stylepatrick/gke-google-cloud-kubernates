@@ -42,7 +42,7 @@ spec:
           value: "test"
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 8080
 ---
 # Service
 apiVersion: v1
@@ -54,8 +54,8 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 80
-    targetPort: 80
+    port: 8080
+    targetPort: 8080
   selector:
     app: app
   type: NodePort
