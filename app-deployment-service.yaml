@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: default
+  labels:
+    app: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: gcr.io/project/app
+        env:
+        - name: DB_URL
+          value: "jdbc:postgresql://db:5432/postgres"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PWD
+          value: "testpassword"
+        - name: APP_VERSION
+          value: "1"
+        - name: APP_ENVIRONMENT
+          value: "1"
+        - name: KEYCLOAK_REALM
+          value: "url/auth"
+        - name: KEYCLOAK_RESOURCE
+          value: "test"
+        - name: KEYCLOAK_AUTH
+          value: "test"
+        ports:
+        - name: http
+          containerPort: 80
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  selector:
+    app: app
+  type: NodePort
+
