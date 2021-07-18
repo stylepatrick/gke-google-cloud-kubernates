@@ -1,5 +1,5 @@
-# gke-google-cloud-kubernates
- Postgres, Keycloak and sample application deployed in Google Cloud Kubernates.
+# gke-google-cloud-kubernetes
+ Postgres, Keycloak and sample application deployed in Google Cloud Kubernetes.
  
  ## Steps
  
